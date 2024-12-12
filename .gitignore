@@ -1,0 +1,5 @@
+# Ignore Node.js dependencies
+node_modules/
+
+# Ignore macOS Finder metadata files
+.DS_Store

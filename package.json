@@ -1,0 +1,27 @@
+{
+  "name": "api-testing-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha tests/**/*.js --timeout 5000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^1.7.9",
+    "chai": "^5.1.2",
+    "chai-http": "^5.1.1",
+    "mocha": "^11.0.1"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.3.0",
+    "faker": "^6.6.6",
+    "node-fetch": "^2.7.0"
+  }
+}
