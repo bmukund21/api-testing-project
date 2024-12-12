@@ -95,7 +95,7 @@ app.get('/books', (req, res) => {
 
   const numBooks = 5;
   const books = Array.from({ length: numBooks }, () => ({
-    book_id: faker.string.uuid(), // Correct UUID method
+    book_id: faker.string.uuid(), 
     name: faker.commerce.productName(),
     author_name: faker.person.fullName(),
     price: faker.commerce.price(),
@@ -174,7 +174,6 @@ app.post('/users/:userId/checkout', (req, res) => {
       cart_items: [{
         book_id,
         qty: quantity,
-        // Convert these to strings if your tests expect them as strings:
         price: price.toFixed(2),
         line_total: total_amount.toFixed(2),
       }],

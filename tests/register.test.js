@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { expect } from 'chai';
-const baseUrl = 'http://localhost:3000'; // Ensure this is the correct base URL
+const baseUrl = 'http://localhost:3000'; // localhost
 import { faker } from '@faker-js/faker';
 
 

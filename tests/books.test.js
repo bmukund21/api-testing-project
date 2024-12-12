@@ -20,7 +20,7 @@ const fetchWithAuth = async (url, token = 'valid_token', method = 'GET', body = 
 };
 
 describe('Books Search API', () => {
-  // Test 1: Search for a hardcoded value
+  // Test 1: Search
   it('should return the book when search query matches "Book 1"', async () => {
     const { response, data } = await fetchWithAuth(`${baseUrl}/books?query=Book 1`);
     

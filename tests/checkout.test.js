@@ -92,7 +92,7 @@ describe('Checkout API Tests', () => {
     const payload = {
       book_id: '123e4567-e89b-12d3-a456-426614174000',
       quantity: 1
-      // price is missing
+
     };
 
     const response = await fetch(`${baseUrl}/users/${userId}/checkout`, {

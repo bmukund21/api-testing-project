@@ -58,7 +58,7 @@ describe('Add to Cart API', () => {
     expect(firstItem).to.have.property('price').that.is.a('string');
     expect(firstItem).to.have.property('line_total').that.is.a('string');
 
-    // Also ensure total_amount exists
+    // total_amount exists
     expect(data.cart).to.have.property('total_amount').that.is.a('string');
   });
 

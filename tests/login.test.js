@@ -23,7 +23,7 @@ describe('Login API', () => {
     
     expect(response.status).to.equal(200); // Success
     expect(data).to.have.property('username', 'john_doe');
-    expect(data).to.have.property('token').that.is.a('string'); // Ensure token is returned and is a string
+    expect(data).to.have.property('token').that.is.a('string'); // token is returned and is a string
     expect(data).to.have.property('message', 'Welcome back');
   });
 
