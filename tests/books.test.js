@@ -1,7 +1,8 @@
 import fetch from 'node-fetch';
 import { expect } from 'chai';
+import config from '../config/config.js'; // path to config file
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = config.baseUrl;
 
 // Helper function to make authorized requests
 const fetchWithAuth = async (url, token = 'valid_token', method = 'GET', body = null) => {

@@ -1,16 +1,14 @@
 import fetch from 'node-fetch';
 import { expect } from 'chai';
+import config from '../config/config.js'; // path to config file
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = config.baseUrl;
 
 describe('Add to Cart API', () => {
 
   // Test Case 1: Missing Token
   it('should return an error if token is missing', async () => {
-    const payload = {
-      book_id: '5678',
-      quantity: 2
-    };
+    const payload = config.testData.addToCart.validPayload;
 
     const response = await fetch(`${baseUrl}/users/123/cart`, {
       method: 'POST',
@@ -29,16 +27,13 @@ describe('Add to Cart API', () => {
 
   // Test Case 2: Successful addition to cart
   it('should add item to the cart successfully with a valid token', async () => {
-    const payload = {
-      book_id: '5678',
-      quantity: 2
-    };
+    const payload = config.testData.addToCart.validPayload;
 
     const response = await fetch(`${baseUrl}/users/123/cart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'valid_token'  // Providing a valid token
+        'Authorization': config.tokens.valid,  // Providing a valid token
       },
       body: JSON.stringify(payload),
     });
@@ -72,7 +67,7 @@ describe('Add to Cart API', () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'valid_token'
+        'Authorization': config.tokens.valid,
       },
       body: JSON.stringify(payload),
     });
@@ -85,16 +80,13 @@ describe('Add to Cart API', () => {
 
   // Test Case 4 (Optional): Invalid Token
   it('should return unauthorized error if the token is invalid', async () => {
-    const payload = {
-      book_id: '5678',
-      quantity: 2
-    };
+    const payload = config.testData.addToCart.validPayload;
 
     const response = await fetch(`${baseUrl}/users/123/cart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'invalid_token' // Invalid token
+        'Authorization': config.tokens.invalid, // Invalid token
       },
       body: JSON.stringify(payload),
     });

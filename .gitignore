@@ -3,3 +3,6 @@ node_modules/
 
 # Ignore macOS Finder metadata files
 .DS_Store
+
+# ignore reporting tool
+mochawesome-report/

@@ -1,15 +1,14 @@
 import fetch from 'node-fetch';
 import { expect } from 'chai';
-const baseUrl = 'http://localhost:3000';
+import config from '../config/config.js'; // path to config file
+
+const baseUrl = config.baseUrl;
 
 describe('Login API', () => {
 
   // Test Case 1: Successful Login
   it('should login a user successfully', async () => {
-    const userCredentials = {
-      username: 'john_doe',
-      password: 'Password123!'  // Correct credentials
-    };
+    const userCredentials = config.testData.login.validCredentials;
 
     const response = await fetch(`${baseUrl}/users/login`, {
       method: 'POST',
@@ -29,9 +28,7 @@ describe('Login API', () => {
 
   // Test Case 2: Missing Username
   it('should fail if username is missing', async () => {
-    const userCredentials = {
-      password: 'Password123!'  // Missing username
-    };
+    const userCredentials = config.testData.login.missingUsername;
 
     const response = await fetch(`${baseUrl}/users/login`, {
       method: 'POST',
@@ -49,10 +46,7 @@ describe('Login API', () => {
 
   // Test Case 3: Incorrect Password
   it('should fail if password is incorrect', async () => {
-    const userCredentials = {
-      username: 'john_doe',
-      password: 'wrongPassword123!'  // Incorrect password
-    };
+    const userCredentials = config.testData.login.incorrectPassword;
 
     const response = await fetch(`${baseUrl}/users/login`, {
       method: 'POST',
@@ -70,7 +64,7 @@ describe('Login API', () => {
 
   // Test Case 4: Missing Credentials (both username and password)
   it('should fail if both username and password are missing', async () => {
-    const userCredentials = {};  // Both fields missing
+    const userCredentials = config.testData.login.missingCredentials;  // Both fields missing
 
     const response = await fetch(`${baseUrl}/users/login`, {
       method: 'POST',

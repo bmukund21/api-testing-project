@@ -1,16 +1,19 @@
+// tests/registration.test.js
+
 import fetch from 'node-fetch';
 import { expect } from 'chai';
-const baseUrl = 'http://localhost:3000'; // localhost
+import config from '../config/config.js'; // path to config file
 import { faker } from '@faker-js/faker';
 
+const baseUrl = config.baseUrl;
 
 describe('Register API', () => {
-
+  
   it('should register a new user successfully', async () => {
     const userPayload = {
       username: faker.person.firstName(),
-      password: 'Password123!',
-      password_confirmation: 'Password123!'
+      password: config.testData.registration.validUser.password,
+      password_confirmation: config.testData.registration.validUser.password_confirmation,
     };
 
     const response = await fetch(`${baseUrl}/users/register`, {
@@ -28,7 +31,7 @@ describe('Register API', () => {
   it('should fail if password confirmation is missing', async () => {
     const userPayload = {
       username: faker.person.firstName(),
-      password: 'Password123!'
+      password: config.testData.registration.missingPasswordConfirmation.password,
     };
 
     const response = await fetch(`${baseUrl}/users/register`, {
@@ -45,8 +48,8 @@ describe('Register API', () => {
   it('should fail if passwords do not match', async () => {
     const userPayload = {
       username: faker.person.firstName(),
-      password: 'Password123!',
-      password_confirmation: 'Password12345!' // Mismatched password confirmation
+      password: config.testData.registration.passwordMismatch.password,
+      password_confirmation: config.testData.registration.passwordMismatch.password_confirmation,
     };
 
     const response = await fetch(`${baseUrl}/users/register`, {
@@ -62,9 +65,9 @@ describe('Register API', () => {
 
   it('should fail if username is already taken', async () => {
     const userPayload = {
-      username: 'existing_user',
-      password: 'Password123!',
-      password_confirmation: 'Password123!'
+      username: config.testData.registration.existingUser.username,
+      password: config.testData.registration.existingUser.password,
+      password_confirmation: config.testData.registration.existingUser.password_confirmation,
     };
 
     const response = await fetch(`${baseUrl}/users/register`, {
@@ -78,4 +81,5 @@ describe('Register API', () => {
     expect(data).to.have.property('error', 'Username is already taken');
   });
 
+  
 });
