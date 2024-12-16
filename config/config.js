@@ -10,7 +10,7 @@ const config = {
         { username: 'john_doe', password: 'Password123!' },
         { username: 'jane_smith', password: 'SecurePassword456!' },
       ],
-      // You can add more predefined users here if needed
+
     },
   
     // Tokens
@@ -81,7 +81,7 @@ const config = {
       // Sample payloads for add to cart tests
       addToCart: {
         validPayload: {
-          book_id: '5678', // Replace with dynamic or existing book IDs as needed
+          book_id: '5678', 
           quantity: 2,
         },
         missingFields: {},
