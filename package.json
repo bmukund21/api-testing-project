@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha tests/**/*.js --reporter mochawesome --report-options reportDir= reports,reportFileName=report,overwrite=true --timeout 5000",
+    "test": "mocha tests/**/*.js --reporter mochawesome --reporter-options reportDir=reports,reportFilename=report,overwrite=true --timeout 5000",
     "test:html": "npm run test"
   },
   "keywords": [],
@@ -24,7 +24,7 @@
     "mochawesome-report-generator": "^6.2.0"
   },
   "dependencies": {
-    "@faker-js/faker": "^9.3.0",
+    "@faker-js/faker": "^9.4.0",
     "faker": "^6.6.6",
     "node-fetch": "^2.7.0"
   }

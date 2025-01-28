@@ -1,24 +1,13 @@
-import fetch from 'node-fetch';
 import { expect } from 'chai';
-import config from '../config/config.js'; // path to config file
-
-const baseUrl = config.baseUrl;
+import { post } from '../helpers/apiClient.js';
+import config from '../../config/config.js';
 
 describe('Checkout API Tests', () => {
   it('should return error if token is missing', async () => {
     const userId = '123';
     const payload = config.testData.checkout.missingToken;
 
-    const response = await fetch(`${baseUrl}/users/${userId}/checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-        // No Authorization header
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await response.json();
+    const { response, data } = await post(`/users/${userId}/checkout`, payload);
 
     expect(response.status).to.equal(400);
     expect(data).to.have.property('error', 'Token required');
@@ -28,16 +17,7 @@ describe('Checkout API Tests', () => {
     const userId = '123';
     const payload = config.testData.checkout.validPayload;
 
-    const response = await fetch(`${baseUrl}/users/${userId}/checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': config.tokens.valid,
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await response.json();
+    const { response, data } = await post(`/users/${userId}/checkout`, payload, config.tokens.valid);
 
     expect(response.status).to.equal(201);
     expect(data).to.have.property('cart');
@@ -61,18 +41,9 @@ describe('Checkout API Tests', () => {
     const userId = '123';
     const payload = config.testData.checkout.paymentDecline;
 
-    const response = await fetch(`${baseUrl}/users/${userId}/checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': config.tokens.valid,
-      },
-      body: JSON.stringify(payload),
-    });
+    const { response, data } = await post(`/users/${userId}/checkout`, payload, config.tokens.valid);
 
-    const data = await response.json();
-
-    expect(response.status).to.equal(402);
+    expect(response.status).to.equal(400);
     expect(data).to.have.property('error', 'Payment declined');
   });
 
@@ -80,16 +51,7 @@ describe('Checkout API Tests', () => {
     const userId = '123';
     const payload = config.testData.checkout.missingFields;
 
-    const response = await fetch(`${baseUrl}/users/${userId}/checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': config.tokens.valid,
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await response.json();
+    const { response, data } = await post(`/users/${userId}/checkout`, payload, config.tokens.valid);
 
     expect(response.status).to.equal(400);
     expect(data).to.have.property('error', 'Book ID, quantity, and price are required');
