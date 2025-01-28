@@ -18,7 +18,7 @@ Before starting, ensure that the following tools are installed on your machine:
 
 ### Step 1: Clone the Repository
 
-```git clone https://github.com/bmukund21/api-testing-assignment.git ```
+```git clone https://github.com/bmukund21/api-testing-project.git ```
 cd api-testing-project 
 
 ### Step 2: Install Dependencies
